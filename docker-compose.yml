@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  cs16_server:
+    container_name: cs16_server
+    image: cs16ds/server:latest
+    networks:
+      - cs_network
+    restart: always
+    environment:
+      - START_MAP=fy_pool_day
+      - MAXPLAYERS=16
+      - START_MONEY=800
+      - FRIENDLY_FIRE=1
+      - RCON_PASSWORD=password
+      - ADMIN_STEAM=0:0:138504330
+      - RESTART_ON_FAIL=1
+    ports:
+      - 26900:26900/udp
+      - 27020:27020/udp
+      - 27015:27015/udp
+      - 27015:27015
+    volumes:
+      - ./cstrike/server.cfg:/opt/hlds/cstrike/server.cfg
+      - ./cstrike/mapcycle.txt:/opt/hlds/cstrike/mapcycle.txt
+      - ./cstrike/maps:/opt/hlds/cstrike/maps
+      - ./cstrike/addons/podbot:/opt/hlds/cstrike/addons/podbot
+      - ./cstrike/addons/metamod/plugins.ini:/opt/hlds/cstrike/addons/metamod/plugins.ini
+      - ./cstrike/addons/plugins/amxx_podbotmenu.amxx:/opt/hlds/cstrike/addons/plugins/amxx_podbotmenu.amxx
+
+  cs16_stats:
+    container_name: cs16_stats
+    build: .
+    networks:
+      - cs_network
+    depends_on:
+      - cs16_server
+    ports:
+      - 5000:5000
+    volumes:
+      - ./stats:/app
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_ENV=development
+    command: flask run --host=0.0.0.0
+
+networks:
+  cs_network:
+    driver: bridge
