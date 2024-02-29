@@ -24,13 +24,20 @@ services:
       - ./cstrike/server.cfg:/opt/hlds/cstrike/server.cfg
       - ./cstrike/mapcycle.txt:/opt/hlds/cstrike/mapcycle.txt
       - ./cstrike/maps:/opt/hlds/cstrike/maps
-      - ./cstrike/sound/my_custom_sounds:/opt/hlds/cstrike/sound/my_custom_sounds
       - ./cstrike/addons/podbot:/opt/hlds/cstrike/addons/podbot
       - ./cstrike/addons/metamod/plugins.ini:/opt/hlds/cstrike/addons/metamod/plugins.ini
 
       - ./cstrike/addons/amxmodx/configs/plugins.ini:/opt/hlds/cstrike/addons/amxmodx/configs/plugins.ini
-      - ./cstrike/addons/plugins/amxx_podbotmenu.amxx:/opt/hlds/cstrike/addons/plugins/amxx_podbotmenu.amxx
-      - ./cstrike/addons/plugins/my_custom_sound_plugin.amxx:/opt/hlds/cstrike/addons/plugins/my_custom_sound_plugin.amxx
+
+      - ./cstrike/addons/amxmodx/plugins/amxx_podbotmenu.amxx:/opt/hlds/cstrike/addons/amxmodx/plugins/amxx_podbotmenu.amxx
+
+      - ./cstrike/sound/misc:/opt/hlds/cstrike/sound/misc
+      - ./cstrike/sound/my_custom_sounds:/opt/hlds/cstrike/sound/my_custom_sounds
+      - ./cstrike/addons/amxmodx/plugins/my_custom_sound_plugin.amxx:/opt/hlds/cstrike/addons/amxmodx/plugins/my_custom_sound_plugin.amxx
+      - ./cstrike/addons/amxmodx/plugins/alt_end_round_sounds.amxx:/opt/hlds/cstrike/addons/amxmodx/plugins/alt_end_round_sounds.amxx
+      - ./cstrike/addons/amxmodx/configs/roundsound.ini:/opt/hlds/cstrike/addons/amxmodx/configs/roundsound.ini
+      - ./cstrike/addons/amxmodx/configs/round_sound:/opt/hlds/cstrike/addons/amxmodx/configs/round_sound
+      - ./cstrike/addons/amxmodx/data/lang/end_roundsound.txt:/opt/hlds/cstrike/addons/amxmodx/data/lang/end_roundsound.txt
 
   cs16_stats:
     container_name: cs16_stats
